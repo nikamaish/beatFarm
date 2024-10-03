@@ -1,0 +1,57 @@
+import React, { useState } from 'react';
+import Header from './components/Header';
+import HeroSection from './components/HeroSection';
+import Footer from './components/Footer';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
+import Main from './components/Main'; 
+import Cart from './components/Cart';
+import History from './components/History'; 
+import Contact from './components/Contact'; 
+
+function App() {
+    const [cart, setCart] = useState([]);
+    const [purchaseHistory, setPurchaseHistory] = useState([]);
+
+    const handleAddToCart = (beat) => {
+        setCart((prevCart) => [...prevCart, beat]);
+        console.log(`${beat.trackName} added to cart!`);
+    };
+
+    const handleRemoveFromCart = (id) => {
+        setCart((prevCart) => prevCart.filter(item => item.id !== id));
+        console.log(`Removed item with id ${id} from cart.`);
+    };
+
+    const handlePurchase = (item) => {
+        setPurchaseHistory((prevHistory) => [...prevHistory, item]);
+        handleRemoveFromCart(item.id); // Remove item from cart after purchase
+    };
+
+    return (
+        <Router>
+            <div className="bg-light-brown min-h-screen flex flex-col">
+                
+                <Header cartCount={cart.length}/>
+
+
+                <main className="flex-grow">
+                    <Routes>
+                        <Route path="/" element={<Main onAddToCart={handleAddToCart} />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/signup" element={<SignUp />} />
+                        <Route path="/cart" element={<Cart cart={cart} onRemoveFromCart={handleRemoveFromCart} onPurchase={handlePurchase} />} />
+                        <Route path="/history" element={<History purchaseHistory={purchaseHistory} />} /> {/* Pass purchase history */}
+                        <Route path ="/contact" element={<Contact />} />   
+                    </Routes>
+                </main>
+
+
+                <Footer />
+            </div>
+        </Router>
+    );
+}
+
+export default App;

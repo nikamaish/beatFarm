@@ -11,6 +11,7 @@ import History from './components/History';
 import Contact from './components/Contact'; 
 import ArtistSignUp from './components/ArtistSignup';
 import ArtistLogin from './components/ArtistLogin';
+import UserProfile from './components/UserProfile';
 
 function App() {
     const [cart, setCart] = useState([]);
@@ -32,7 +33,7 @@ function App() {
     };
 
     return (
-        <Router>
+        // <Router>
             <div className="bg-light-brown min-h-screen flex flex-col">
                 
                 <Header cartCount={cart.length}/>
@@ -43,6 +44,7 @@ function App() {
                         <Route path="/" element={<Main onAddToCart={handleAddToCart} />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/signup" element={<SignUp />} />
+                        <Route path="/userprofile" element={<UserProfile/>}/>
                         <Route path='/artistsignup' element={<ArtistSignUp/>}/>
                         <Route path='/artistlogin' element={<ArtistLogin/>}/>
                         <Route path="/cart" element={<Cart cart={cart} onRemoveFromCart={handleRemoveFromCart} onPurchase={handlePurchase} />} />
@@ -54,7 +56,7 @@ function App() {
 
                 <Footer />
             </div>
-        </Router>
+        // </Router>
     );
 }
 

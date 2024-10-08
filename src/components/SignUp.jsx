@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; // Assuming you're using react-router for navigation
+import React, { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext'; // Import AuthContext
 
 const SignUp = () => {
+  const { login } = useContext(AuthContext); // Use AuthContext to access login function
   const [formData, setFormData] = useState({ email: '', password: '', confirmPassword: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
   // Handle Input Change
   const handleInputChange = (e) => {
@@ -52,7 +55,12 @@ const SignUp = () => {
 
       if (response.ok) {
         setSuccessMessage('Account created successfully!');
-        setFormData({ email: '', password: '', confirmPassword: '' }); // Clear form
+
+        // Call the login method from AuthContext with the returned token
+        login(data.token); // Assuming your API returns a token on successful signup
+
+        // Navigate to user profile page or just reload
+        navigate('/profile'); // Redirect to profile page or wherever
       } else {
         setErrorMessage(data.errorMessage || 'Something went wrong');
       }

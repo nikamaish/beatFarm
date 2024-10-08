@@ -4,8 +4,8 @@ import { FaPlay, FaPause, FaForward, FaBackward, FaShareAlt } from 'react-icons/
 import { GiSpeedometer } from 'react-icons/gi'; // Import speedometer icon for playback speed
 
 const songsList = [
-  { id: 1, title: "Sajani re", artist: "Arijit Singh", artistImage: "assets/arijitSingh.jpeg", src: "assets/beat1.mp3", rating:0 },
-  { id: 2, title: "Shape Of You", artist: "Ed Sheeran", artistImage: "assets/edSheeran.jpeg", src: "/assets/beat2.mp3", rating:0 },
+  { id: 1, title: "Sajani re", artist: "Arijit Singh", artistImage: "assets/arijitSingh.jpeg", src: "assets/beat1.mp3", rating: 0 },
+  { id: 2, title: "Shape Of You", artist: "Ed Sheeran", artistImage: "assets/edSheeran.jpeg", src: "/assets/beat2.mp3", rating: 0 },
 ];
 
 const AudioPlayer = () => {
@@ -68,11 +68,11 @@ const AudioPlayer = () => {
     setVolume(prevVolume => {
       // Increase volume by 10% (0.1 in 0-1 range)
       let newVolume = Math.min(prevVolume + 0.1, 1); // Ensure it doesn't go above 100% (1)
-  
+
       if (wavesurferRef.current) {
         wavesurferRef.current.setVolume(newVolume);
       }
-  
+
       return newVolume;
     });
   };
@@ -81,11 +81,11 @@ const AudioPlayer = () => {
     setVolume(prevVolume => {
       // Decrease volume by 10% (0.1 in 0-1 range)
       let newVolume = Math.max(prevVolume - 0.1, 0); // Ensure it doesn't go below 0%
-  
+
       if (wavesurferRef.current) {
         wavesurferRef.current.setVolume(newVolume);
       }
-  
+
       return newVolume;
     });
   };
@@ -119,7 +119,7 @@ const AudioPlayer = () => {
       const playPromise = wavesurferRef.current.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
-          setIsPlaying(true); 
+          setIsPlaying(true);
         }).catch(error => console.error("Playback failed:", error));
       }
     }
@@ -132,8 +132,8 @@ const AudioPlayer = () => {
 
     if (wavesurferRef.current) {
       wavesurferRef.current.load(songsList[(currentSongIndex - 1 + songsList.length) % songsList.length].src);
-      wavesurferRef.current.play(); 
-      setIsPlaying(true); 
+      wavesurferRef.current.play();
+      setIsPlaying(true);
     }
   };
 
@@ -155,7 +155,7 @@ const AudioPlayer = () => {
       text: `Check out this song by ${currentSong.artist}: ${currentSong.title}`,
       url: window.location.href,
     };
-    
+
     navigator.share(shareData)
       .then(() => console.log('Share successful'))
       .catch((error) => console.error('Error sharing:', error));
@@ -170,10 +170,10 @@ const AudioPlayer = () => {
 
   return (
     <div style={{ width: "100%" }} className="fixed bottom-0 left-0 right-0 mx-auto  bg-black text-white shadow-lg text-center pb-4 z-50"> {/* Fixed position at bottom */}
-      
+
       <div className="flex flex-col md:flex-row justify-between items-center">
         <div className="flex items-center mb-4 md:mb-0">
-          <img src={currentSong.artistImage} alt={currentSong.artist} className="w-12 h-12 md:w-14 md:h-14 rounded-full"   loading="lazy" />
+          <img src={currentSong.artistImage} alt={currentSong.artist} className="w-12 h-12 md:w-14 md:h-14 rounded-full" loading="lazy" />
           <div>
             <h2 className="text-lg font-bold ml-2">{currentSong.title}</h2>
             <p className="text-xs text-gray-200">{currentSong.artist}</p>
@@ -192,17 +192,16 @@ const AudioPlayer = () => {
           <button onClick={() => handleSpeed(1)} className={`px-2 py-2 rounded ${playbackRate === 1 ? "bg-electric-blue text-white" : "bg-dark-brown text-white"} hover:bg-electric-blue`}>1x</button>
           <button onClick={() => handleSpeed(1.25)} className={`px-2 py-2 rounded ${playbackRate === 1.25 ? "bg-electric-blue text-white" : "bg-dark-brown text-white"} hover:bg-electric-blue`}>1.25x</button>
           {/* <div className="flex space-x-2 mx-2 mb-2 md:mb-0"> */}
-  <button onClick={decreaseVolume} className="bg-dark-brown text-white px-2 py-2 rounded hover:bg-electric-blue">Vol -</button>
-  <button onClick={increaseVolume} className="bg-dark-brown text-white px-2 py-2 rounded hover:bg-electric-blue">Vol +</button>
-{/* </div> */}
+          <button onClick={decreaseVolume} className="bg-dark-brown text-white px-4 py-2 rounded hover:bg-electric-blue"><img src="/assets/v-.png" width="20px" alt="image" /></button>
+          <button onClick={increaseVolume} className="bg-dark-brown text-white px-4 py-2 rounded hover:bg-electric-blue"><img src="/assets/v+.png" width="20px" alt="image" /></button>
         </div>
 
         {/* Playback Controls */}
         <div className="flex space-x-4 items-center justify-center flex-grow mb-2 md:mb-0">
           <button onClick={prevSong} className="bg-dark-brown text-white px-4 py-2 rounded hover:bg-electric-blue"><FaBackward /></button>
-          <button onClick={backward} className="bg-dark-brown text-white px-4 py-2 rounded hover:bg-electric-blue"><img src="assets/10-.png" width="20px" height="20px" alt="Backward by 10 seconds"   loading="lazy"/></button>
+          <button onClick={backward} className="bg-dark-brown text-white px-4 py-2 rounded hover:bg-electric-blue"><img src="assets/10-.png" width="20px" height="20px" alt="Backward by 10 seconds" loading="lazy" /></button>
           <button onClick={togglePlayPause} className="bg-electric-blue text-white px-6 py-2 rounded-full hover:bg-blue-600 transition">{isPlaying ? <FaPause /> : <FaPlay />}</button>
-          <button onClick={forward} className="bg-dark-brown text-white px-4 py-2 rounded hover:bg-electric-blue"><img src="assets/10+.png" width="20px" height="20px" alt="Forward by 10 seconds"   loading="lazy" /></button>
+          <button onClick={forward} className="bg-dark-brown text-white px-4 py-2 rounded hover:bg-electric-blue"><img src="assets/10+.png" width="20px" height="20px" alt="Forward by 10 seconds" loading="lazy" /></button>
           <button onClick={nextSong} className="bg-dark-brown text-white px-4 py-2 rounded hover:bg-electric-blue"><FaForward /></button>
         </div>
 

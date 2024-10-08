@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Login = () => {
+const ArtistLogin = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState(''); // New state for success message
@@ -18,7 +18,7 @@ const Login = () => {
     setSuccessMessage(''); // Clear success message on new submission
 
     try {
-      const response = await fetch('http://localhost:8000/api/users/signin', {
+      const response = await fetch('http://localhost:8000/api/artists/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md mx-auto bg-light-brown p-8 rounded-lg my-36 shadow-md">
-        <h2 className="text-2xl font-bold text-center text-dark-brown mb-4">User Sign In</h2>
+        <h2 className="text-2xl font-bold text-center text-dark-brown mb-4">Artist Log In</h2>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -83,7 +83,7 @@ const Login = () => {
         <div className="mt-4 text-center">
           <p className="text-dark-brown">
             Don't have an account?{' '}
-            <Link to="/signup" className="text-electric-blue ">
+            <Link to="/artistsignup" className="text-electric-blue ">
               Sign Up
             </Link>
           </p>
@@ -93,4 +93,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ArtistLogin;

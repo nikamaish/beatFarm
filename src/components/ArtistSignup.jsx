@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Assuming you're using react-router for navigation
 
-const SignUp = () => {
-  const [formData, setFormData] = useState({ email: '', password: '', confirmPassword: '' });
+const ArtistSignUp = () => {
+  const [formData, setFormData] = useState({ email: '', artistName:'', password: '', confirmPassword: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
@@ -29,6 +29,11 @@ const SignUp = () => {
       return;
     }
 
+    if (!formData.artistName) {
+        setErrorMessage('Artist Name is required');
+        return;
+      }
+
     if (!formData.password) {
       setErrorMessage('Password is required');
       return;
@@ -40,7 +45,7 @@ const SignUp = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/users/signup', {
+      const response = await fetch('http://localhost:8000/api/artists/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +57,7 @@ const SignUp = () => {
 
       if (response.ok) {
         setSuccessMessage('Account created successfully!');
-        setFormData({ email: '', password: '', confirmPassword: '' }); // Clear form
+        setFormData({ email: '', artistName:'', password: '', confirmPassword: '' }); // Clear form
       } else {
         setErrorMessage(data.errorMessage || 'Something went wrong');
       }
@@ -64,7 +69,7 @@ const SignUp = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md mx-auto text-center bg-light-brown p-8 rounded-lg my-36 shadow-md">
-        <h2 className="text-2xl font-bold text-dark-brown mb-4">User Sign Up</h2>
+        <h2 className="text-2xl font-bold text-dark-brown mb-4">Artist Sign Up</h2>
 
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -77,6 +82,18 @@ const SignUp = () => {
               className="w-full p-3 rounded border-2 border-dark-brown focus:outline-none focus:border-electric-blue"
             />
           </div>
+
+          <div className="mb-4">
+            <input
+              type="text"
+              name="artistName"
+              value={formData.artistName}
+              onChange={handleInputChange}
+              placeholder="Enter Artist Name"
+              className="w-full p-3 rounded border-2 border-dark-brown focus:outline-none focus:border-electric-blue"
+            />
+          </div>
+
           <div className="mb-4">
             <input
               type="password"
@@ -115,7 +132,7 @@ const SignUp = () => {
         <div className="mt-4 text-center">
           <p className="text-dark-brown">
             Already have an account?{' '}
-            <Link to="/login" className="text-electric-blue">
+            <Link to="/artistlogin" className="text-electric-blue">
               Sign In
             </Link>
           </p>
@@ -125,4 +142,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default ArtistSignUp

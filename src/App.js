@@ -9,6 +9,8 @@ import Main from './components/Main';
 import Cart from './components/Cart';
 import History from './components/History'; 
 import Contact from './components/Contact'; 
+import ArtistSignUp from './components/ArtistSignup';
+import ArtistLogin from './components/ArtistLogin';
 
 function App() {
     const [cart, setCart] = useState([]);
@@ -41,6 +43,8 @@ function App() {
                         <Route path="/" element={<Main onAddToCart={handleAddToCart} />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/signup" element={<SignUp />} />
+                        <Route path='/artistsignup' element={<ArtistSignUp/>}/>
+                        <Route path='/artistlogin' element={<ArtistLogin/>}/>
                         <Route path="/cart" element={<Cart cart={cart} onRemoveFromCart={handleRemoveFromCart} onPurchase={handlePurchase} />} />
                         <Route path="/history" element={<History purchaseHistory={purchaseHistory} />} /> {/* Pass purchase history */}
                         <Route path ="/contact" element={<Contact />} />   

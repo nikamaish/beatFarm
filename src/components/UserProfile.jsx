@@ -1,31 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie'; // Import js-cookie
 
 const UserProfile = () => {
   const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   // Fetch user profile data (email only) from the server
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/profile', {
+        const token = Cookies.get('authToken'); // Retrieve the token using the correct key
+        console.log('Retrieved token:', token); // Log the token to check
+
+        if (!token) {
+          setErrorMessage('No token found. Please log in.'); // Handle the case where no token exists
+          return;
+        }
+
+        const response = await fetch('http://localhost:8000/api/users/me', {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include JWT token
+            'Authorization': `Bearer ${token}`, // Use Bearer token from cookies
           },
         });
 
         const data = await response.json();
 
         if (response.ok) {
-          setEmail(data.email); // Assuming the backend returns user email
+          setEmail(data.email); // Set the email if the request is successful
         } else {
-          setErrorMessage(data.message || 'Failed to fetch profile');
+          setErrorMessage(data.message || 'Failed to fetch profile'); // Handle errors
         }
       } catch (error) {
-        setErrorMessage('Failed to connect to the server');
+        setErrorMessage('Failed to connect to the server'); // Handle fetch errors
       }
     };
 
@@ -34,29 +44,51 @@ const UserProfile = () => {
 
   // Handle logout
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Remove JWT token from localStorage
+    Cookies.remove('authToken'); // Remove the token from cookies using the correct key
     navigate('/login'); // Redirect to login page after logout
   };
 
+  // Toggle dropdown visibility
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md mx-auto text-center bg-light-brown p-8 rounded-lg my-36 shadow-md">
-        <h2 className="text-2xl font-bold text-dark-brown mb-4">User Profile</h2>
+    <div className="relative inline-block text-left">
+      {/* User Profile Button */}
+      <button
+        onClick={toggleDropdown}
+        className="bg-electric-blue text-white px-6 py-2 rounded-full w-full hover:bg-blue-600 transition duration-300"
+      >
+        {email || 'Loading...'}
+      </button>
 
-        {/* Display email */}
-        <p className="text-lg mb-4 text-dark-brown">Email: {email || 'Loading...'}</p>
+      {/* Dropdown Menu */}
+      {dropdownOpen && (
+        <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="py-1">
+            {/* Display email */}
+            <p className="block px-4 py-2 text-sm text-gray-700">
+              {email || 'Loading...'}
+            </p>
 
-        {/* Display Error Message */}
-        {errorMessage && <p className="text-coral mb-4">{errorMessage}</p>}
+            {/* Error Message if any */}
+            {errorMessage && (
+              <p className="block px-4 py-2 text-sm text-red-500">
+                {errorMessage}
+              </p>
+            )}
 
-        {/* Logout Button */}
-        <button
-          onClick={handleLogout}
-          className="w-full p-3 rounded bg-electric-blue text-white font-bold hover:bg-blue-600 transition-colors"
-        >
-          Logout
-        </button>
-      </div>
+            {/* Logout Option */}
+            <button
+              onClick={handleLogout}
+              className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

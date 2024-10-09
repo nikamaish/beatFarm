@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { HiMenuAlt4, HiX, HiChevronDown, HiChevronUp } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext'; // If AuthContext is in 'contexts' folder
+import UserProfile from './UserProfile';
 
 const Header = ({ cartCount }) => {
   const { authToken, logout } = useContext(AuthContext); // Use AuthContext
@@ -40,7 +41,7 @@ const Header = ({ cartCount }) => {
         <div className="hidden md:block relative">
           {authToken ? ( // Show Logout if logged in
             <button onClick={logout} className="bg-electric-blue text-white px-6 py-2 rounded-full w-full hover:bg-blue-600 transition duration-300">
-              Logout
+              <UserProfile/>
             </button>
           ) : (
             <button onClick={toggleDropdown} className="flex items-center bg-electric-blue text-white px-6 py-2 rounded-full w-full hover:bg-blue-600 transition duration-300">

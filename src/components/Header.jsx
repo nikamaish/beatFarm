@@ -40,9 +40,10 @@ const Header = ({ cartCount }) => {
         {/* Sign Up / Log In / Logout Button */}
         <div className="hidden md:block relative">
           {authToken ? ( // Show Logout if logged in
-            <button onClick={logout} className="bg-electric-blue text-white px-6 py-2 rounded-full w-full hover:bg-blue-600 transition duration-300">
-              <UserProfile/>
-            </button>
+            // <button onClick={logout} className="bg-electric-blue text-white px-6 py-2 rounded-full w-full hover:bg-blue-600 transition duration-300">
+            //   <UserProfile/>
+            // </button>
+            <UserProfile/>
           ) : (
             <button onClick={toggleDropdown} className="flex items-center bg-electric-blue text-white px-6 py-2 rounded-full w-full hover:bg-blue-600 transition duration-300">
               Sign Up / Sign In

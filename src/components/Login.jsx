@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext'; // Import AuthContext
+
 
 const Login = () => {
+  const { login } = useContext(AuthContext); // Use AuthContext to access login function
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState(''); // New state for success message
@@ -30,6 +33,7 @@ const Login = () => {
 
       if (response.ok) {
         setSuccessMessage('Logged in successfully!');
+        login(data.token);
         setFormData({ email: '', password: '' }); // Clear form
       } else {
         setErrorMessage(data.message || 'Invalid email or password');

@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext  } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'; // Import js-cookie
+import { AuthContext } from '../contexts/AuthContext'; // If AuthContext is in 'contexts' folder
+
 
 const UserProfile = () => {
   const [email, setEmail] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { authToken, logout } = useContext(AuthContext); // Use AuthContext
   const navigate = useNavigate();
 
   // Fetch user profile data (email only) from the server
@@ -81,10 +84,10 @@ const UserProfile = () => {
 
             {/* Logout Option */}
             <button
-              onClick={handleLogout}
+             onClick={logout}
               className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
             >
-              Logout
+              SignOut
             </button>
           </div>
         </div>

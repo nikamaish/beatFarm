@@ -3,9 +3,10 @@ import { HiMenuAlt4, HiX, HiChevronDown, HiChevronUp } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext'; // If AuthContext is in 'contexts' folder
 import UserProfile from './UserProfile';
+import ArtistProfile from './ArtistProfile';
 
 const Header = ({ cartCount }) => {
-  const { authToken, logout } = useContext(AuthContext); // Use AuthContext
+  const { authToken, logout, role } = useContext(AuthContext); // Use AuthContext
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -39,17 +40,19 @@ const Header = ({ cartCount }) => {
 
         {/* Sign Up / Log In / Logout Button */}
         <div className="hidden md:block relative">
-          {authToken ? ( // Show Logout if logged in
-            // <button onClick={logout} className="bg-electric-blue text-white px-6 py-2 rounded-full w-full hover:bg-blue-600 transition duration-300">
-            //   <UserProfile/>
-            // </button>
-            <UserProfile/>
-          ) : (
-            <button onClick={toggleDropdown} className="flex items-center bg-electric-blue text-white px-6 py-2 rounded-full w-full hover:bg-blue-600 transition duration-300">
-              Sign Up / Sign In
-              {dropdownOpen ? <HiChevronUp className="ml-2" /> : <HiChevronDown className="ml-2" />}
-            </button>
-          )}
+        {authToken ? ( // Show the correct profile if logged in
+  role === 'artist' ? ( // If role is 'artist', show ArtistProfile
+    <ArtistProfile />
+  ) : ( // Otherwise, show UserProfile for normal users
+    <UserProfile />
+  )
+) : (
+  <button onClick={toggleDropdown} className="flex items-center bg-electric-blue text-white px-6 py-2 rounded-full w-full hover:bg-blue-600 transition duration-300">
+    Sign Up / Sign In
+    {dropdownOpen ? <HiChevronUp className="ml-2" /> : <HiChevronDown className="ml-2" />}
+  </button>
+)}
+
 
           {/* Dropdown Menu */}
           {dropdownOpen && !authToken && ( // Show dropdown only if not logged in

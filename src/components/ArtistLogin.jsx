@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthContext'; // Import AuthContext
+
 
 const ArtistLogin = () => {
+  const { login } = useContext(AuthContext); // Use AuthContext to access login function
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState(''); // New state for success message
@@ -31,6 +34,7 @@ const ArtistLogin = () => {
       if (response.ok) {
         setSuccessMessage('Logged in successfully!');
         setFormData({ email: '', password: '' }); // Clear form
+        login(data.token);
       } else {
         setErrorMessage(data.message || 'Invalid email or password');
       }

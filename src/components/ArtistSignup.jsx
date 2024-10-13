@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom'; // Assuming you're using react-router for navigation
+import { AuthContext } from '../contexts/AuthContext'; // Import AuthContext
+
 
 const ArtistSignUp = () => {
+  const { login } = useContext(AuthContext); // Use AuthContext to access login function
   const [formData, setFormData] = useState({ email: '', artistName:'', password: '', confirmPassword: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');

@@ -23,7 +23,7 @@ const UserProfile = () => {
           return;
         }
 
-        const response = await fetch('http://localhost:8000/api/users/me', {
+        const response = await fetch('http://localhost:8000/api/users/getUser', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`, // Use Bearer token from cookies

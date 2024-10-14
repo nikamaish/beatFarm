@@ -22,7 +22,7 @@ const ArtistProfile = () => {
           return;
         }
 
-        const response = await fetch('http://localhost:8000/api/artists/me', {
+        const response = await fetch('http://localhost:8000/api/artists/getArtist', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`, // Use Bearer token from cookies

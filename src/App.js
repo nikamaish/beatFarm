@@ -14,6 +14,9 @@ import UserProfile from './components/UserProfile';
 import AdminSignIn from './admin/AdminSignIn';
 import Dashboard from './admin/Dashboard';
 import Plans from './admin/Plans';
+import Artists from './admin/Artists'
+import Genres from './admin/Genres'
+
 
 function App() {
     const [cart, setCart] = useState([]);
@@ -55,11 +58,13 @@ function App() {
                         <Route path="/admin/sigin" element={<AdminSignIn />} />
                         <Route path="/admin/dashboard" element={<Dashboard />} />
                         <Route path="/admin/plans" element={<Plans />} />
+                        <Route path='/admin/artists' element={<Artists/>}/>
+                        <Route path= '/admin/genres' element={<Genres/>}/>
                     </Routes>
                 </main>
 
 
-                <Footer />
+                {/* <Footer /> */}
             </div>
         // </Router>
     );

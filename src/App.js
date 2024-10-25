@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Header from './components/Header';
-import HeroSection from './components/HeroSection';
 import Footer from './components/Footer';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
@@ -13,6 +12,8 @@ import ArtistSignUp from './components/ArtistSignup';
 import ArtistLogin from './components/ArtistLogin';
 import UserProfile from './components/UserProfile';
 import AdminSignIn from './admin/AdminSignIn';
+import Dashboard from './admin/Dashboard';
+import Plans from './admin/Plans';
 
 function App() {
     const [cart, setCart] = useState([]);
@@ -52,6 +53,8 @@ function App() {
                         <Route path="/history" element={<History purchaseHistory={purchaseHistory} />} /> {/* Pass purchase history */}
                         <Route path ="/contact" element={<Contact />} />   
                         <Route path="/admin/sigin" element={<AdminSignIn />} />
+                        <Route path="/admin/dashboard" element={<Dashboard />} />
+                        <Route path="/admin/plans" element={<Plans />} />
                     </Routes>
                 </main>
 

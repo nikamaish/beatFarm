@@ -12,6 +12,7 @@ import Contact from './components/Contact';
 import ArtistSignUp from './components/ArtistSignup';
 import ArtistLogin from './components/ArtistLogin';
 import UserProfile from './components/UserProfile';
+import AdminSignIn from './admin/AdminSignIn';
 
 function App() {
     const [cart, setCart] = useState([]);
@@ -50,6 +51,7 @@ function App() {
                         <Route path="/cart" element={<Cart cart={cart} onRemoveFromCart={handleRemoveFromCart} onPurchase={handlePurchase} />} />
                         <Route path="/history" element={<History purchaseHistory={purchaseHistory} />} /> {/* Pass purchase history */}
                         <Route path ="/contact" element={<Contact />} />   
+                        <Route path="/admin/sigin" element={<AdminSignIn />} />
                     </Routes>
                 </main>
 

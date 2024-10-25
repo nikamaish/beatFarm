@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode'; // Correct import statement
+import {jwtDecode} from 'jwt-decode'; // Corrected import statement
 
 // Create AuthContext
 export const AuthContext = createContext();
@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true); // To handle loading state
   const navigate = useNavigate();
 
-  // When the component mounts, check if token is present in cookies
+  // Check if token is present in cookies when the component mounts
   useEffect(() => {
     const token = Cookies.get('authToken'); // Get the token from cookies
 
@@ -37,11 +37,19 @@ export const AuthProvider = ({ children }) => {
     try {
       const decoded = jwtDecode(token); // Decode the JWT
       setRole(decoded.role); // Extract and set the role from token
+
+      // Redirect based on role after login
+      if (decoded.role === 'admin') {
+        navigate('/'); // Admin dashboard
+      } else if (decoded.role === 'artist') {
+        navigate('/'); // Artist dashboard
+      } else {
+        navigate('/'); // Default user route
+      }
+
     } catch (error) {
       console.error('Error decoding token', error);
     }
-
-    navigate('/'); // Navigate to a protected route after login
   };
 
   // Logout function
@@ -49,7 +57,7 @@ export const AuthProvider = ({ children }) => {
     Cookies.remove('authToken'); // Remove token from cookies
     setAuthToken(null);
     setRole(null);
-    navigate('/'); // Redirect to login page after logging out
+    navigate('/'); 
   };
 
   return (

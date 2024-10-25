@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthContext'; // If AuthContext is in 'contexts' folder
 import UserProfile from './UserProfile';
 import ArtistProfile from './ArtistProfile';
+import AdminProfile from '../admin/AdminProfile';
 
 const Header = ({ cartCount }) => {
   const { authToken, logout, role } = useContext(AuthContext); // Use AuthContext
@@ -40,18 +41,23 @@ const Header = ({ cartCount }) => {
 
         {/* Sign Up / Log In / Logout Button */}
         <div className="hidden md:block relative">
-        {authToken ? ( // Show the correct profile if logged in
-  role === 'artist' ? ( // If role is 'artist', show ArtistProfile
-    <ArtistProfile />
-  ) : ( // Otherwise, show UserProfile for normal users
-    <UserProfile />
-  )
-) : (
-  <button onClick={toggleDropdown} className="flex items-center bg-electric-blue text-white px-6 py-2 rounded-full w-full hover:bg-blue-600 transition duration-300">
-    Sign Up / Sign In
-    {dropdownOpen ? <HiChevronUp className="ml-2" /> : <HiChevronDown className="ml-2" />}
-  </button>
-)}
+          {authToken ? (
+            role === 'admin' ? ( // If role is 'admin', show AdminProfile
+              <AdminProfile />
+            ) : role === 'artist' ? ( // If role is 'artist', show ArtistProfile
+              <ArtistProfile />
+            ) : ( // Otherwise, show UserProfile for normal users
+              <UserProfile />
+            )
+          ) : (
+            <button
+              onClick={toggleDropdown}
+              className="flex items-center bg-electric-blue text-white px-6 py-2 rounded-full w-full hover:bg-blue-600 transition duration-300"
+            >
+              Sign Up / Sign In
+              {dropdownOpen ? <HiChevronUp className="ml-2" /> : <HiChevronDown className="ml-2" />}
+            </button>
+          )}
 
 
           {/* Dropdown Menu */}
@@ -85,12 +91,19 @@ const Header = ({ cartCount }) => {
 
           {/* Mobile Sign Up / Log In Button */}
           <div className="relative">
-            {authToken ? ( // Mobile Logout button
-              <button onClick={logout} className="bg-electric-blue text-white px-6 py-2 rounded-full w-full hover:bg-blue-600 transition duration-300">
-                Logout
-              </button>
+            {authToken ? (
+              role === 'admin' ? ( // If role is 'admin', show AdminProfile
+                <AdminProfile />
+              ) : role === 'artist' ? ( // If role is 'artist', show ArtistProfile
+                <ArtistProfile />
+              ) : ( // Otherwise, show UserProfile for normal users
+                <UserProfile />
+              )
             ) : (
-              <button onClick={toggleDropdown} className="flex items-center bg-electric-blue text-white px-6 py-2 rounded-full w-full hover:bg-blue-600 transition duration-300">
+              <button
+                onClick={toggleDropdown}
+                className="flex items-center bg-electric-blue text-white px-6 py-2 rounded-full w-full hover:bg-blue-600 transition duration-300"
+              >
                 Sign Up / Sign In
                 {dropdownOpen ? <HiChevronUp className="ml-2" /> : <HiChevronDown className="ml-2" />}
               </button>

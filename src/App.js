@@ -14,8 +14,9 @@ import UserProfile from './components/UserProfile';
 import AdminSignIn from './admin/AdminSignIn';
 import Dashboard from './admin/Dashboard';
 import Plans from './admin/Plans';
-import Artists from './admin/Artists'
 import Genres from './admin/Genres'
+import UserManagement from './admin/UserManagement';
+import ArtistManagement from './admin/ArtistManagement';
 
 
 function App() {
@@ -58,7 +59,8 @@ function App() {
                         <Route path="/admin/sigin" element={<AdminSignIn />} />
                         <Route path="/admin/dashboard" element={<Dashboard />} />
                         <Route path="/admin/plans" element={<Plans />} />
-                        <Route path='/admin/artists' element={<Artists/>}/>
+                        <Route path='/admin/artists' element={<ArtistManagement/>}/>
+                        <Route path='/admin/users' element={<UserManagement/>}/>
                         <Route path= '/admin/genres' element={<Genres/>}/>
                     </Routes>
                 </main>

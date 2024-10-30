@@ -90,10 +90,10 @@ const Genres = () => {
     };
 
     return (
-        <div className="flex h-screen bg-gray-100">
+        <div className="flex  bg-gray-100">
             <Sidebar /> {/* Sidebar component */}
             <div className="flex-1 p-6">
-                <h1 className="text-3xl font-semibold mb-6 text-gray-800">Genres</h1>
+                {/* <h1 className="text-3xl font-semibold mb-6 text-gray-800">Genres</h1> */}
 
                 {/* Add Genre button */}
                 <div className="flex justify-end mb-4">

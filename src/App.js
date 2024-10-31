@@ -17,6 +17,7 @@ import Plans from './admin/Plans';
 import Genres from './admin/Genres'
 import UserManagement from './admin/UserManagement';
 import ArtistManagement from './admin/ArtistManagement';
+import SongUpload from './components/SongUpload';
 
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
                         <Route path='/admin/artists' element={<ArtistManagement/>}/>
                         <Route path='/admin/users' element={<UserManagement/>}/>
                         <Route path= '/admin/genres' element={<Genres/>}/>
+                        <Route path='/artist/uploadsongs' element={<SongUpload/>}/>
                     </Routes>
                 </main>
 

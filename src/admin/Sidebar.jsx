@@ -11,7 +11,7 @@ function Sidebar() {
       <Link to="/admin/artists" className="block py-2 px-4 hover:bg-gray-700 rounded">Artists</Link>
       <Link to="/admin/genres" className="block py-2 px-4 hover:bg-gray-700 rounded">Genres</Link>
       <Link to="/admin/users" className="block py-2 px-4 hover:bg-gray-700 rounded">Users</Link>
-      <Link to="/admin/request" className="block py-2 px-4 hover:bg-gray-700 rounded">Request</Link>
+      <Link to="/admin/requests" className="block py-2 px-4 hover:bg-gray-700 rounded">Request</Link>
 
       {/* Add other sidebar links as needed */}
     </div>

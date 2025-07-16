@@ -78,7 +78,7 @@ const ApprovalSongs = () => {
                             <tr>
                                 <th className="px-6 py-4 font-semibold">Title</th>
                                 <th className="px-6 py-4 font-semibold">Genre</th>
-                                <th className="px-6 py-4 font-semibold">Artist</th>
+                                {/* <th className="px-6 py-4 font-semibold">Artist</th> */}
                                 <th className="px-6 py-4 font-semibold">Status</th>
                                 <th className="px-6 py-4 font-semibold">Actions</th>
                             </tr>
@@ -88,7 +88,7 @@ const ApprovalSongs = () => {
                                 <tr key={song._id} className="hover:bg-gray-50">
                                     <td className="px-6 py-4 text-gray-700">{song.title}</td>
                                     <td className="px-6 py-4 text-gray-500">{song.genre}</td>
-                                    <td className="px-6 py-4 text-gray-500">{song.artist.name}</td>
+                                    {/* <td className="px-6 py-4 text-gray-500">{song.artist.name}</td> */}
                                     <td className="px-6 py-4 text-gray-500">
                                         {song.status === 'approved' ? (
                                             <span className="text-green-600 font-semibold">Approved</span>

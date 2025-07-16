@@ -30,10 +30,10 @@ const Header = ({ cartCount }) => {
 
         <nav className="hidden md:flex space-x-8">
           <Link to='' className="text-lg hover:text-electric-blue transition duration-300 ease-in-out">All Beats</Link>
-          <Link to='' className="text-lg hover:text-electric-blue transition duration-300 ease-in-out">Free Beats</Link>
-          <Link to='' className="text-lg hover:text-electric-blue transition duration-300 ease-in-out">Premium Beats</Link>
+          {/* <Link to='' className="text-lg hover:text-electric-blue transition duration-300 ease-in-out">Free Beats</Link> */}
+          {/* <Link to='' className="text-lg hover:text-electric-blue transition duration-300 ease-in-out">Premium Beats</Link> */}
           <Link to='' className="text-lg hover:text-electric-blue transition duration-300 ease-in-out">License Info</Link>
-          <Link to='' className="text-lg hover:text-electric-blue transition duration-300 ease-in-out">FAQ</Link>
+          {/* <Link to='' className="text-lg hover:text-electric-blue transition duration-300 ease-in-out">FAQ</Link> */}
           <Link to='/contact' className="text-lg hover:text-electric-blue transition duration-300 ease-in-out">Contact</Link>
           <Link to='/cart' className="text-lg hover:text-electric-blue transition duration-300 ease-in-out">Cart {cartCount}</Link>
           <Link to='/history' className="text-lg hover:text-electric-blue transition duration-300 ease-in-out">History</Link>

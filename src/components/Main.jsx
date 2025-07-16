@@ -17,10 +17,10 @@ const Main = ({ onAddToCart }) => {
       <div className="w-full lg:w-3/4 pt-20 pr-2 lg:order-2">
         <HeroSection />
         <div className="flex flex-col pt-4">
-          <Searchbar />
+          {/* <Searchbar /> */}
           <div>
             <AudioPlayer  />
-            <BeatsCards onAddToCart={onAddToCart} />
+            <BeatsCards  onAddToCart={onAddToCart} />
           </div>
         </div>
       </div>

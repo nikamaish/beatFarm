@@ -45,11 +45,34 @@ const beats = [
         rating: 4.7,
         img: 'assets/AR.jpeg',
     },
+    {
+        id: 5,
+        trackName: "Retro Groove",
+        producer: "Hans Zimmer",
+        genre: "Retro",
+        key: "F Major",
+        bpm: 100,
+        price: 34.99,
+        rating: 4.6,
+        img: 'assets/Hans.jpeg',
+    },
+    {
+        id: 6,
+        trackName: "Jazz Cafe",
+        producer: "John Williams",
+        genre: "Jazz",
+        key: "D Major",
+        bpm: 110,
+        price: 29.99,
+        rating: 4.9,
+        img: 'assets/John.jpeg',
+    }
 ];
+
 
 const BeatsCards = ({ onAddToCart }) => {
     return (
-        <div className="flex flex-wrap justify-center">
+        <div className="flex flex-wrap justify-center mb-20">
             {beats.map((beat) => (
                 <div key={beat.id} className="w-full max-w-sm bg-gradient-to-r from-[#FFEFBA] to-[#FFFFFF] rounded-lg shadow-lg dark:bg-gray-800 m-2">
                     <div className="flex flex-col items-center pb-10">
@@ -71,12 +94,12 @@ const BeatsCards = ({ onAddToCart }) => {
                             >
                                 Add to Cart
                             </button>
-                            <button 
+                            {/* <button 
                                 // Implement preview functionality here
                                 className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:bg-gray_800 dark:text-gray_400 dark:border-gray_600 dark:hover:text-white dark:hover:bg-gray_700"
                             >
                                 Preview
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                 </div>

@@ -8,7 +8,7 @@ const Sidebar = () => {
     <div>
       <div className='flex-row'>
       <FeaturedPlaylist />
-      <Filters />
+      {/* <Filters /> */}
       <NewsletterSignup   />
       </div>
     </div>
